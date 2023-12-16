@@ -2,7 +2,7 @@
 # yamllint disable rule:indentation
 # yamllint disable rule:comments-indentation
 # too many spelling things, spell-checker: disable
-# checksum: d6ab04176dd53cb5cb1e23f6e85ae336
+# checksum: ca784e102d6168cf0d1f831066d8240c
 ---
 - module-name: '_dbus_glib_bindings'
   implicit-imports:
@@ -5532,6 +5532,13 @@
   implicit-imports:
     - depends:
         - '._*'
+
+- module-name: 'tf_keras.src.utils.vis_utils'
+  anti-bloat:
+    - description: 'remove IPython reference'
+      no-auto-follow:
+        'IPython': 'ignore'
+      when: 'not use_ipython'
 
 - module-name: 'thinc.backends.cblas'
   implicit-imports:
