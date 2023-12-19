@@ -2,7 +2,7 @@
 # yamllint disable rule:indentation
 # yamllint disable rule:comments-indentation
 # too many spelling things, spell-checker: disable
-# checksum: 044ef4daf2ecba4766a41a879845eb08
+# checksum: 324db02c78c5e3066a550be9a2b6b952
 ---
 - module-name: '_dbus_glib_bindings'
   implicit-imports:
@@ -984,6 +984,14 @@
     - description: 'workaround python version test not compile time recognized'
       replacements:
         'PY_VERSION < version.parse("3.8")': 'str(__import__("sys").version_info < (3,8))'
+
+- module-name: 'evaluate.module'
+  anti-bloat:
+    - description: 'add support for compiled methods'
+      replacements_plain:
+        'self.compute = types.MethodType(': 'self.compute = self.compute.__class__('
+        'self.add_batch = types.MethodType(': 'self.add_batch = self.add_batch.__class__('
+        'self.add = types.MethodType(': 'self.add = self.add.__class__('
 
 - module-name: 'exchangelib'
   implicit-imports:
